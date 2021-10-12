@@ -13,3 +13,4 @@ plt.ylabel('Counts')
 plt.title('Teams Occurences 1995-2020 ')
 
 plt.show()
+
