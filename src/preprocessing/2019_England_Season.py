@@ -64,7 +64,9 @@ print('total home team wins', awaywin_count)
 print('In the' , (awaywin_3_more_count/awaywin_count)*100,'% of the away victories 3 or more goals have been scored \n' )
 
 
-
-
+victory3goals= (((homewin_3_more_count/homewin_count)*100))
+denom= (((homewin_3_more_count/homewin_count)*100)+((Draw_3_more_count/Draw_count)*100)+((awaywin_3_more_count/awaywin_count)*100))
+solution= (victory3goals/denom)
+print(solution*100)
 
 
