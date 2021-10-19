@@ -7,11 +7,12 @@ Created on Wed Oct  13 09:48:53 2021
 
 import numpy as np
 import pandas as pd
-
+from sklearn.decomposition import PCA
 
 # Importing the dataset
 data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/2019/England_2019.csv')
-data= data.drop(columns=['Date','Country','Year'])
+#if i have the team points i automaticaly know who wins we wan to predict before the game ends
+data= data.drop(columns=['Date','Country','Year', 'Team_1_(pts)', 'Team_2_(pts)' ])
 
 # Creating Input : All the independent variables
 X = data.iloc[:, :-1].values
@@ -48,32 +49,30 @@ X = np.append(arr = np.ones((270,1), dtype = int), values = X,  axis = 1)
 X_opt = X[:,:]
 #   Back Ward Selection=============================================================================
 
-# # Using statsmodels library to create a model for MLR
-# import statsmodels.regression.linear_model as sm
-# regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
+# Using statsmodels library to create a model for MLR
+import statsmodels.regression.linear_model as sm
+regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
 
-# # print(regression_OLS.summary())
-# # #BackWard Selection
-# X_opt = X[:, [1, 2, 3, 4, 5, 6, 7, 9,10]]
-# regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
 # print(regression_OLS.summary())
+# #BackWard Selection
+X_opt = X[:, [1, 2, 3, 4, 5, 6, 7, 8]]
+regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
+print(regression_OLS.summary())
 
-# X_opt = X[:, [1, 2, 3, 4, 6, 7, 9,10]]
-# regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
-# print(regression_OLS.summary())
+X_opt = X[:, [1, 2, 3, 5, 6, 7, 8]]
+regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
+print(regression_OLS.summary())
 
-# X_opt = X[:, [1, 2, 3, 4, 6, 7, 10]]
-# regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
-# print(regression_OLS.summary())
+X_opt = X[:, [1, 2, 3, 5, 7, 8]]
+regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
+print(regression_OLS.summary())
 
-# X_opt = X[:, [1, 2, 3, 4, 10]]
-# regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
-# print(regression_OLS.summary())
+X_opt = X[:, [1, 2, 3, 5, 8]]
+regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
+print(regression_OLS.summary())
 
-# X_opt = X[:, [1, 2, 3, 10]]
-# regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
-# print(regression_OLS.summary())
-# =============================================================================
+
+# ====================================================================================================
 
 
 
@@ -101,5 +100,8 @@ print('Rsquared',r2_score(Y_train, x_pred))
 # Using statsmodels library to create a model for MLR
 import statsmodels.regression.linear_model as sm
 regression_OLS = sm.OLS(endog = Y, exog = X_opt).fit()
+
+pca = PCA(5)
+X_projected = pca.fit_transform(X)
 
 print(regression_OLS.summary())
