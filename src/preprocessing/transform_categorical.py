@@ -54,17 +54,17 @@ Z.columns =['Round', 'Date', 'Team_1', 'Team_2', 'Year', 'Country', 'FT_Team_1',
  
 #Z.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Preprocessed_V1.csv', index=False)  
 
-England = Z.loc[Z['Country'] == 1]
+England = Z.loc[Z['Country'] == 0]
 England.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/England_league_V1.csv', index=False)
 
-Spain = Z.loc[Z['Country'] == 2]
+Spain = Z.loc[Z['Country'] == 1]
 Spain.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Spain_league_V1.csv', index=False)
 
-France = Z.loc[Z['Country'] == 3]
+France = Z.loc[Z['Country'] == 2]
 France.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/France_league_V1.csv', index=False)
 
-Germany = Z.loc[Z['Country'] == 4]
+Germany = Z.loc[Z['Country'] == 3]
 Germany.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Germany_league_V1.csv', index=False)
 
-Italy = Z.loc[Z['Country'] == 5]
+Italy = Z.loc[Z['Country'] == 4]
 Italy.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Italy_league_V1.csv', index=False)

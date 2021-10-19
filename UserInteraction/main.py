@@ -22,7 +22,7 @@ Which one is the best?
 
 dataset_name = st.sidebar.selectbox(
     'Select Dataset',
-    ('England_2019', 'Breast Cancer', 'Wine')
+    ('England_2019', 'England', 'France', 'Germany', 'Italy', 'Spain')
 )
 
 st.write(f"## {dataset_name} Dataset")
@@ -37,10 +37,21 @@ def get_dataset(name):
     if name == 'England_2019':
         data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/2019/England_2019.csv')
         data= data.drop(columns=['Date','Country','Year'])
-    elif name == 'Wine':
-        data = datasets.load_wine()
+    elif name =='England':
+        data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/England_league_V1.csv')
+        data= data.drop(columns=['Date','Country','Year'])
+    elif name =='France':
+        data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/France_league_V1.csv')
+        data= data.drop(columns=['Date','Country','Year']) 
+    elif name =='Germany':
+        data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Germany_league_V1.csv')
+        data= data.drop(columns=['Date','Country','Year'])
+    elif name =='Italy':
+        data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Italy_league_V1.csv')
+        data= data.drop(columns=['Date','Country','Year'])   
     else:
-        data = datasets.load_breast_cancer()
+        data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Spain_league_V1.csv')
+        data= data.drop(columns=['Date','Country','Year'])
     X = data.iloc[:,[0,1,2,4,7]].values
 # Creating Output : All the dependent variables
     y = data.iloc[:,-1].values
@@ -138,6 +149,6 @@ plt.colorbar()
 st.pyplot(fig)
 
 st.title('Key')
-st.text('Match the index with your team starting at 0. \nFor better prediction, use the dataset(country) at least one of your team is in')
+st.text('Match the index with your team starting at 0. \nFor better prediction, use the dataset(country) which contain at least one of your team.')
 team_key = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Teams_1.csv')
 st.write(team_key.iloc[:,[1]].values)
