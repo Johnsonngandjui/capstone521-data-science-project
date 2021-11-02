@@ -21,9 +21,6 @@ print('avg goals score when at home',avg_goals_home)
 avg_goals_away= data['FT_Team_2'].sum()/data['FT_Team_2'].count()
 print('avg goals score when at away',avg_goals_away)
 
-#Home team win, lost , tie percenatge 
-home_WLT_percentage= england_2019_season['Outcome'].value_counts(normalize=True) * 100
-print ('England 2019 win,lost, tie', home_WLT_percentage)
 
 #hometeam win 3 more goals. 
 homewin_3_more= data.loc[(data['FT_Team_1'] >= 3) & (data['Outcome'] ==1)]
