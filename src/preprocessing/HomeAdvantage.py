@@ -29,8 +29,6 @@ data[['Day of Week', 'Day', 'Month', 'Year', 'Gameweek']] = data['Date'].str.spl
 data['Day of Week'] = data['Day of Week'].str.strip('()')
 data['Gameweek'] = data['Gameweek'].str.strip('()')
 
-#Check out the new first row of data
-data.iloc[0]
 
 #Create HomePoints & AwayPoints - datasets that group matches into teams home and away totals for select colummns
 HomePoints = data.groupby(['Season','Country','Team 1']).sum().reset_index()[['Season','Country','Team 1','Team 1 (pts)','FT Team 1', 'H1 Team 1', 'H2 Team 1', 
@@ -61,13 +59,14 @@ AwayPoints['Location'] = 'Away'
 
 #Stick AwayPoints to the end of HomePoints and save it to MergePoints
 MergePoints = HomePoints.append(AwayPoints)
+MergePoints.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Teams_Season_level.csv', index=False)
 
 for col in MergePoints.columns[3:10]:
     colname = str(col) + ' PG'
     MergePoints[colname] = round(MergePoints[col]/MergePoints['Matches'],1)
     
 MergePointsSeason = MergePoints.groupby(['Season','Country','Location']).mean().reset_index()
-MergePointsSeason.head()
+MergePointsSeason.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Country_level.csv', index=False)
 
 describe= data.describe()
 
