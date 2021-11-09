@@ -59,7 +59,7 @@ AwayPoints['Location'] = 'Away'
 
 #Stick AwayPoints to the end of HomePoints and save it to MergePoints
 MergePoints = HomePoints.append(AwayPoints)
-MergePoints.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Teams_Season_level.csv', index=False)
+
 
 for col in MergePoints.columns[3:10]:
     colname = str(col) + ' PG'
@@ -67,7 +67,7 @@ for col in MergePoints.columns[3:10]:
     
 MergePointsSeason = MergePoints.groupby(['Season','Country','Location']).mean().reset_index()
 MergePointsSeason.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Country_level.csv', index=False)
-
+MergePoints.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Teams_Season_level.csv', index=False)
 describe= data.describe()
 
 ggd_of_9=data[data['GGD']==9]
@@ -92,7 +92,22 @@ plt.show()
 g = sns.FacetGrid(MergePoints.groupby(['Season','Country','Location']).mean().reset_index(), row="Country", col="Location")
 g = g.map(plt.plot, "Points PG")
 
+Z = pd.DataFrame(MergePoints)
 
+England = Z.loc[Z['Country'] == 'ENG']
+England.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/England_league_V2.csv', index=False)
+
+Spain = Z.loc[Z['Country'] == 'ESP']
+Spain.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Spain_league_V2.csv', index=False)
+
+France = Z.loc[Z['Country'] == 'FR']
+France.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/France_league_V2.csv', index=False)
+
+Germany = Z.loc[Z['Country'] == 'GER']
+Germany.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Germany_league_V2.csv', index=False)
+
+Italy = Z.loc[Z['Country'] == "IT"]
+Italy.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Italy_league_V2.csv', index=False)
 
 
 
