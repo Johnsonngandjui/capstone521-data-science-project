@@ -52,7 +52,8 @@ Z = pd.DataFrame(X)
 
 Z.columns =['Round', 'Date', 'Team_1', 'Team_2', 'Year', 'Country', 'FT_Team_1', 'FT_Team_2', 'HT_Team_1', 'HT_Team_2', 'GGD', 'Team_1_(pts)', 'Team_2_(pts)', 'Outcome' ]
  
-#Z.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Preprocessed_V1.csv', index=False)  
+#Z.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Preprocessed_V1.csv', index=False)
+Z.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Leagues_V1.csv', index=False)
 
 England = Z.loc[Z['Country'] == 0]
 England.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/England_league_V1.csv', index=False)

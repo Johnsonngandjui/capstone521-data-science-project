@@ -15,5 +15,7 @@ navigate to Userinteraction Folder
 streamlit run main.py
 
 To terminate spark session on jupyter notebook
+run pyspark in file directory to start jupyter notebook with spark
+
 session = SparkSession.builder.appName("myApp").getOrCreate()
 session.stop()

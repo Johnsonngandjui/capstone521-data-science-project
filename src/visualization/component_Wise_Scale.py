@@ -1,10 +1,7 @@
 import pandas as pd
-import xgboost as xgb
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
 from IPython.display import display
 
-data = pd.read_csv('D:\Senior\Capstone\data-science-enviroment\data\Leagues\England_league_V1.csv')
+data = pd.read_csv('D:\Senior\Capstone\data-science-enviroment\data\Leagues\leagues_V1.csv')
 data= data.drop(columns=['Date'])
 display(data.head())
 
