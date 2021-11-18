@@ -7,7 +7,8 @@ You need these dependencies:
 
 pip install streamlit
 pip install scikit-learn
-pip install matplotlib
+pip install matplotlibgit
+pip install XGBoost
 Usage
 
 Run
