@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+### setting up new data set for learning model not in spark. This will turn the file into csv for usage globally in my code
 
 data= data = pd.read_csv('D:\Senior\Capstone\data-science-enviroment\data\BIG FIVE 1995-2019.csv')
 data.dtypes
@@ -93,6 +94,7 @@ g = sns.FacetGrid(MergePoints.groupby(['Season','Country','Location']).mean().re
 g = g.map(plt.plot, "Points PG")
 
 Z = pd.DataFrame(MergePoints)
+Z.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Leagues_V2.csv', index=False)
 
 England = Z.loc[Z['Country'] == 'ENG']
 England.to_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/England_league_V2.csv', index=False)

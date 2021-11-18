@@ -9,6 +9,7 @@ from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
+import xgboost as xgb
 
 from sklearn.metrics import accuracy_score
 import pandas as pd
@@ -22,20 +23,20 @@ Which one is the best?
 
 dataset_name = st.sidebar.selectbox(
     'Select Dataset',
-    ('England_2019', 'England', 'France', 'Germany', 'Italy', 'Spain')
+    ('Every League ', 'England', 'France', 'Germany', 'Italy', 'Spain')
 )
 
 st.write(f"## {dataset_name} Dataset")
 
 classifier_name = st.sidebar.selectbox(
     'Select classifier',
-    ('KNN', 'SVM', 'Random Forest')
+    ('KNN', 'SVM', 'XGBoost', 'Random Forest')
 )
 #data set
 def get_dataset(name):
     data = None
-    if name == 'England_2019':
-        data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/2019/England_2019.csv')
+    if name == 'Every Leagues':
+        data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Leagues_V1.csv')
         data= data.drop(columns=['Date','Country','Year'])
     elif name =='England':
         data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/England_league_V1.csv')
@@ -68,8 +69,11 @@ def add_parameter_ui(clf_name):
         C = st.sidebar.slider('C', 0.01, 10.0)
         params['C'] = C
     elif clf_name == 'KNN':
-        K = st.sidebar.slider('K', 1, 15)
+        K = st.sidebar.slider('Clusters', 1, 15)
         params['K'] = K
+    elif clf_name == 'XGBoost':
+        S = st.sidebar.slider('Seed', 1, 100)
+        params['S'] = S
     else:
         max_depth = st.sidebar.slider('max_depth', 2, 15)
         params['max_depth'] = max_depth
@@ -94,7 +98,9 @@ def get_classifier(clf_name, params):
         clf = SVC(C=params['C'])
     elif clf_name == 'KNN':
         clf = KNeighborsClassifier(n_neighbors=params['K'])
-    else:
+    elif clf_name == 'XGBoost':
+        clf =  xgb.XGBClassifier(seed = params['S'])
+    else: 
         clf = clf = RandomForestClassifier(n_estimators=params['n_estimators'], 
             max_depth=params['max_depth'],)
     return clf
