@@ -23,19 +23,19 @@ Which one is the best?
 
 dataset_name = st.sidebar.selectbox(
     'Select Dataset',
-    ('Every League ', 'England', 'France', 'Germany', 'Italy', 'Spain')
+    ('Leagues', 'England', 'France', 'Germany', 'Italy', 'Spain')
 )
 
 st.write(f"## {dataset_name} Dataset")
 
 classifier_name = st.sidebar.selectbox(
     'Select classifier',
-    ('KNN', 'SVM', 'XGBoost', 'Random Forest')
+    ( 'SVM', 'XGBoost', 'Random Forest')
 )
 #data set
 def get_dataset(name):
     data = None
-    if name == 'Every Leagues':
+    if name == 'Leagues':
         data = pd.read_csv('D:/Senior/Capstone/data-science-enviroment/data/Leagues/Leagues_V1.csv')
         data= data.drop(columns=['Date','Country','Year'])
     elif name =='England':
@@ -68,9 +68,6 @@ def add_parameter_ui(clf_name):
     if clf_name == 'SVM':
         C = st.sidebar.slider('C', 0.01, 10.0)
         params['C'] = C
-    elif clf_name == 'KNN':
-        K = st.sidebar.slider('Clusters', 1, 15)
-        params['K'] = K
     elif clf_name == 'XGBoost':
         S = st.sidebar.slider('Seed', 1, 100)
         params['S'] = S
@@ -83,7 +80,7 @@ def add_parameter_ui(clf_name):
 
 params = add_parameter_ui(classifier_name)
 
-st.sidebar.write("""# Make a prediction""")
+st.sidebar.write("""# Test Classification Model""")
 st.sidebar.write("Use")
 round= st.sidebar.slider('What round did these teams last play in?', 1, 42)
 home_team= st.sidebar.slider('Home Team (use key at the bottom of the page)', 0, 225) 
@@ -96,8 +93,6 @@ def get_classifier(clf_name, params):
     clf = None
     if clf_name == 'SVM':
         clf = SVC(C=params['C'])
-    elif clf_name == 'KNN':
-        clf = KNeighborsClassifier(n_neighbors=params['K'])
     elif clf_name == 'XGBoost':
         clf =  xgb.XGBClassifier(seed = params['S'])
     else: 
@@ -147,7 +142,7 @@ plt.scatter( x1, x5,
         c=y, alpha=0.8,
         cmap='viridis')
 
-plt.xlabel('Rounds ')
+plt.xlabel('Teams')
 plt.ylabel('GDD ')
 plt.colorbar()
 
